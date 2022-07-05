@@ -1,15 +1,18 @@
 import express from "express"
-
+import { 
+         postRoutes,
+         getRoutes
+         
+} from "../controllers/posts.js"
 
 const getRouter = new express.Router()
 const postRouter = new express.Router()
 const deleteRouter = new express.Router()
 const updateRouter = new express.Router()
 
-getRouter.get("/",(res,req)=>res.send("its working"))
+getRouter.get("/",getRoutes)
 
-
-postRouter.post("/",(res,req)=>res.send("its working"))
+postRouter.post("/",postRoutes)
 
 updateRouter.patch("/",(res,req)=>res.send("its working"))
 
