@@ -1,3 +1,4 @@
+import { retriever } from "./helpers/retrieveData"
 import { Posts } from "./components/posts/Posts"
 import './App.css';
 import Form from "./components/form/Form"
@@ -11,7 +12,8 @@ import {
 } from "@mui/material"
 import memories from "./assets/images/memories.png"
 import { styles } from "./styles"
-
+import  useFetch  from "./hooks/useFetch"
+import { getData } from "./api/Api"
 
 const {
     section_padding,
@@ -23,16 +25,18 @@ const {
 
 } = styles
 
+
+
 function App() {
-  
- 
+
   
    return (
-    <Container
+    <Container 
      sx={[
        flex_center,
        section_padding,
        col
+      
        ]}
      >
      <Paper

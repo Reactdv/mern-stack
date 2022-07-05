@@ -42,7 +42,7 @@ const Form =()=>{
   const [tags,setTags] = useState([])
   const [selectedFile,setSelectedFile] = useState("")
 
-console.log(selectedFile)
+
 
 const handleSubmit =()=>{
   axios.post(createData,{
