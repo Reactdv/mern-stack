@@ -1,4 +1,4 @@
-
+import { useState,useEffect } from "react"
 import axios from "axios"
 import thunkMiddleware from "redux-thunk"
 import  useFetch  from "../../hooks/useFetch"
@@ -13,18 +13,19 @@ import {
 } from "../actions/posts"
 
 const FetchData =()=>{
-   
-   return function(dispatch){
-     axios
-     .get("http://localhost:5000/get")
-     .then(res=>{
-        const Data = res.data
-        dispatch(fetchDataSucces(Data))
-     })
-     .catch(err => {
-       const Err = err.message
-       dispatch(fetchDataFail(Err))
-     })
+  return function(dispatch){
+    axios
+    .get(getData)
+    .then(res =>{
+      const Data = res.data
+      dispatch(fetchDataSucces(Data))
+      
+    })
+    .catch(err=>{
+     const Err = err.message
+     dispatch(fetchDataFail(Err))
+      
+    })
   
    }
 }
