@@ -63,3 +63,4 @@ export const allReducers = combineReducers({
   iceCream:iceCreamReducer,
   cake:cakeReducer
 })
+
