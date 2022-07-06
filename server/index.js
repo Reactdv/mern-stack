@@ -4,7 +4,7 @@ import bodyParser from "body-parser"
 import mongoose from "mongoose"
 
 import { postModel } from "./models/posts.js"
-import { getRouter,postRouter } from "./routes/posts.js"
+import { getRouter,postRouter,deleteRouter } from "./routes/posts.js"
 
 const app = express()
 app.use(cors())
@@ -16,17 +16,17 @@ mongoose.connect(CONNECTION_URL,{
   useUnifiedTopology:true
 })
 
-app.use(express.json())
+app.use(express.json({limit:"500mb"}))
 app.use(bodyParser.json({
   
   extended:true,
-  limit:"500mb"
+  limit:"600mb"
 
 }))
 app.use(bodyParser.urlencoded({
   
   extended:true,
-  limit:"500mb"
+  limit:"600mb"
 
 }))
 
@@ -36,3 +36,4 @@ app.listen(PORT,()=>console.log(`running on port: ${PORT}`))
 
 app.use("/get",getRouter)
 app.use("/post",postRouter)
+app.use("/delete/:id",deleteRouter)

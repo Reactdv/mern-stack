@@ -35,4 +35,12 @@ const getRoutes = async(req,res)=>{
   })
 }
 
-export { postRoutes,getRoutes }
+const deleteRoutes = async(req,res)=>{
+  const id = req.params.id
+  await postModel.findByIdAndRemove(_id).exec()
+  console.log("deleted")
+}
+
+
+
+export { postRoutes,getRoutes,deleteRoutes }

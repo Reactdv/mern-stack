@@ -5,9 +5,11 @@ import { types } from "../types/posts"
 const {
   FETCH_DATA_REQUESTED ,
   FETCH_DATA_SUCCEDED,
-  FETCH_DATA_FAILED
+  FETCH_DATA_FAILED,
+  DATA_DELETED
   
 } = types
+
 
 
 const initialStatusState = {
@@ -50,6 +52,7 @@ export const fetchDataReducer =
 }
 
 export const allReducers = combineReducers({
-  request:fetchDataReducer
+  request:fetchDataReducer,
+  
  
 })

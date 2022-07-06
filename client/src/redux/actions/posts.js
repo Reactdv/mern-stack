@@ -3,9 +3,12 @@ import { types } from "../types/posts"
 const {
   FETCH_DATA_REQUESTED ,
   FETCH_DATA_SUCCEDED,
-  FETCH_DATA_FAILED
+  FETCH_DATA_FAILED,
+  DATA_DELETED
   
 } = types
+
+
 
 
 export const fetchDataRequest =()=>(

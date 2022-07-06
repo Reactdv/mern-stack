@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useSelector } from "react-redux"
 
 import useFetch  from "../../hooks/useFetch"
 import axios from "axios"
@@ -41,6 +42,10 @@ const Form =()=>{
   const [message,setMessage] = useState("")
   const [tags,setTags] = useState([])
   const [selectedFile,setSelectedFile] = useState("")
+
+const {Data} = useSelector((state)=>state.request)
+
+
 
 
 
@@ -137,7 +142,8 @@ if(loading){
     </Button>
     
     <Button
-
+  
+    
      color="error"
      variant="contained"
      fullWidth
@@ -145,7 +151,7 @@ if(loading){
        section_padding
        ]}
      >
-      Submit
+      Clear
     </Button>
     
   </form>

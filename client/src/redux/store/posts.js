@@ -2,15 +2,22 @@ import { useState,useEffect } from "react"
 import axios from "axios"
 import thunkMiddleware from "redux-thunk"
 import  useFetch  from "../../hooks/useFetch"
-import { getData } from "../../api/Api"
+import { 
+         getData,
+         deleteData
+  
+} from "../../api/Api"
 import { createStore,applyMiddleware } from "redux"
 import { allReducers } from "../reducers/posts"
 import logger from "redux-logger"
 import { 
        fetchDataRequest,
        fetchDataSucces,
-       fetchDataFail
+       fetchDataFail,
+       
 } from "../actions/posts"
+
+
 
 const FetchData =()=>{
   return function(dispatch){

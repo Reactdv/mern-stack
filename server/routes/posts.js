@@ -1,7 +1,8 @@
 import express from "express"
 import { 
          postRoutes,
-         getRoutes
+         getRoutes,
+         deleteRoutes
          
 } from "../controllers/posts.js"
 
@@ -16,7 +17,7 @@ postRouter.post("/",postRoutes)
 
 updateRouter.patch("/",(res,req)=>res.send("its working"))
 
-deleteRouter.delete("/",(res,req)=>res.send("its working"))
+deleteRouter.delete("/",deleteRoutes)
 
 
 export { 

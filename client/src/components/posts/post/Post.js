@@ -1,4 +1,6 @@
+import axios from "axios"
 import { useState,useEffect } from "react"
+import moment from "moment"
 import {
       Card,
       CardHeader,
@@ -20,9 +22,21 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 
 
-export const Post =()=>{
+export const Post =( postsData )=>{
   const [isLiked,setIsLiked] = useState(false)
+
+const { createdAt,title,creator,selectedFile,msg,tags,Id } = postsData
+
+
+
+const handleDelete =(id)=>{
+  axios
+  .delete(`localhost:5000/delete/:${id}`)
   
+}
+
+let id = Id
+
   const handleLike =()=>{
     setIsLiked(like=> !like)
   }
@@ -36,7 +50,7 @@ export const Post =()=>{
      <CardMedia
      sx={styles.media}
      component="image"
-     image={chad}
+     image={selectedFile}
      />
      <Typography 
      sx={{
@@ -46,7 +60,7 @@ export const Post =()=>{
      }}
      color="common.white"
      variant="h4">
-       Creator
+      {creator}
      </Typography>
      <Box sx={{
        position:"absolute",
@@ -67,26 +81,25 @@ export const Post =()=>{
      }}
      color="common.white"
      variant="subtile2">
-      date ago
+      {moment(createdAt).fromNow()}
      </Typography>
      <CardContent>
        <Typography 
        color="light_clr.tertiary"
        variant="subtitle1">
-        Tags
+        {tags.map(tag=> `#${tag}`)}
        </Typography>
        
        <Typography 
        
        variant="h4">
-        Title
+        {title}
        </Typography>
        <Typography 
        paragraph={true}
        >
-        djddkdjdkdndjdndjdjd
-dkdkddkk
-djddkdkdkd
+        {msg}
+ 
        </Typography>
      </CardContent>
      <CardActions 
@@ -106,7 +119,9 @@ djddkdkdkd
          } 
        </Button>
        
-       <Button color="error">
+       <Button 
+       onClick={()=>handleDelete(id)}
+       color="error">
          <DeleteIcon  />
        </Button>
      </CardActions>

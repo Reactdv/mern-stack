@@ -54,7 +54,9 @@ function App() {
        position="static"
       color="inherit"
        >
-       <Typography variant="h4">
+       <Typography 
+       color="common.white"
+       variant="h4">
         Memories
        </Typography>
        <img 
