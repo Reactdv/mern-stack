@@ -1,58 +1,43 @@
-import { combineReducers } from "redux"
 
-import { types } from "../types/posts"
-
-const {
-  FETCH_DATA_REQUESTED ,
-  FETCH_DATA_SUCCEDED,
-  FETCH_DATA_FAILED,
-  DATA_DELETED
+import { 
+     FETCH_ALL, 
+     CREATE, 
+     UPDATE, 
+     DELETE, 
+     LIKE 
   
-} = types
+} from '../types/posts';
 
+const reducer =(posts=[],action)=>{
+  switch(action.type){
+   
+    case FETCH_ALL:
+      return action.payload;
+      
+    case LIKE :
+      return posts.map((post)=>(
+        post._id === action.payload._id ?
+        action.payload : post
 
-
-const initialStatusState = {
-  
-  loading : false,
-  Data :[],
-  Err:""
-  
-}
-
-export const fetchDataReducer =
-(state = initialStatusState,action)=>{
-  switch (action.type){
+        ))
     
-    case FETCH_DATA_REQUESTED:
-      return {
-        ...state,
-        loading:true
-      }
-    case FETCH_DATA_SUCCEDED :
-      return {
-        ...state,
-        loading:false,
-        Data:action.payload
-      }
-     case FETCH_DATA_FAILED:
-       return {
-         ...state,
-         Data:[],
-         Err:action.payload
-       }
-     
-      default:
-      return state
+    case CREATE:
+      return [...posts,action.payload]
     
+    case UPDATE:
+      
+      return posts.map((post)=>(
+        post._id === action.payload ? action.payload : post
+        
+        ))
+        
     
+    case DELETE:
+      return posts.filter((post)=> post._id !== action.payload)
+      
+    default :
+    return posts
   }
-  
-  
 }
 
-export const allReducers = combineReducers({
-  request:fetchDataReducer,
-  
- 
-})
+export default reducer

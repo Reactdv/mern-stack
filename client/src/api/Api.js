@@ -1,19 +1,18 @@
+import axios from "axios"
 
 
-const createData = "http://localhost:5000/post"
+const url = "http://localhost:5000/posts"
 
-const getData = "http://localhost:5000/get"
+export const fetchPosts =()=> axios.get(url)
 
-const deleteData =(id)=> 
-`http://localhost:5000/delete/:${id}`
+export const createPost =(newPost)=>
+axios.post(url,newPost)
 
-const updateData = "http://localhost:5000/update"
+export const likePost =(id)=>
+axios.patch(`${url}/${id}/likePost`)
 
-export { 
-      
-      createData,
-      getData,
-      deleteData,
-      updateData
-  
-}
+export const updatePost =(id,updatedPost)=>
+axios.patch(`${url}/${id}`,updatedPost)
+
+export const deletePost =(id)=>
+axios.delete(`${url}/${id}`)

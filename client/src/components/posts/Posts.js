@@ -16,21 +16,20 @@ import {
 
 
 export const Posts =()=>{
-  const {Data} = useSelector((state)=>state.request)
- 
+const posts = useSelector(state=> state.posts) 
+
   return (
+!posts.length ?  <CircularProgress />
+ : (
     <Box>
     
     <Grid container spacing={5}>
     
-    {
-      Data.map((item)=>{
-        
-      
-        return (
-          
-          <Grid 
-          key={item._id}
+      {
+        posts.map((post)=>(
+         
+       <Grid 
+       key={post._id}
        item 
        mobile={12} 
        tablet={6}
@@ -39,23 +38,18 @@ export const Posts =()=>{
  
         
        <Post 
-        Id={item.id}
-        creator={item.creator}
-        title={item.title}
-        msg={item.message}
-        tags={item.tags}
-        selectedFile={item.selectedFile}
-        createdAt={item.createdAt}
+        post={post}
        />
         
        </Grid>  
           
-          )
-      })
-    } 
-
+          
+          
+          ))
+      }
+     
     </Grid>
     </Box>
-    
+    )
     )
 } 

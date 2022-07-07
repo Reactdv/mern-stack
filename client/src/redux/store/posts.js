@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react"
+ { /* import { useState,useEffect } from "react"
 import axios from "axios"
 import thunkMiddleware from "redux-thunk"
 import  useFetch  from "../../hooks/useFetch"
@@ -49,3 +49,6 @@ export const store = createStore(
 const unsubscribe = store.subscribe(()=>{})
 store.dispatch(FetchData())
 unsubscribe()
+
+
+ */}

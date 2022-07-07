@@ -22,24 +22,13 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 
 
-export const Post =( postsData )=>{
+export const Post =( {post} )=>{
   const [isLiked,setIsLiked] = useState(false)
-
-const { createdAt,title,creator,selectedFile,msg,tags,Id } = postsData
-
-
-
-const handleDelete =(id)=>{
-  axios
-  .delete(`localhost:5000/delete/:${id}`)
   
-}
-
-let id = Id
-
-  const handleLike =()=>{
-    setIsLiked(like=> !like)
-  }
+const handleLike =()=> 
+setIsLiked(like=>!like)  
+  
+ 
   return (
     
    <Card sx={{
@@ -50,7 +39,7 @@ let id = Id
      <CardMedia
      sx={styles.media}
      component="image"
-     image={selectedFile}
+     image={post.selectedFile}
      />
      <Typography 
      sx={{
@@ -60,7 +49,7 @@ let id = Id
      }}
      color="common.white"
      variant="h4">
-      {creator}
+      {post.Creator}
      </Typography>
      <Box sx={{
        position:"absolute",
@@ -81,25 +70,24 @@ let id = Id
      }}
      color="common.white"
      variant="subtile2">
-      {moment(createdAt).fromNow()}
+      {moment(post.createdAt).fromNow()}
      </Typography>
      <CardContent>
        <Typography 
        color="light_clr.tertiary"
        variant="subtitle1">
-        {tags.map(tag=> `#${tag}`)}
+        {post.tags.map(tag=>`#${tag}`)}
        </Typography>
        
        <Typography 
-       
        variant="h4">
-        {title}
+         {post.title}
        </Typography>
        <Typography 
        paragraph={true}
        >
-        {msg}
- 
+    
+         {post.message}
        </Typography>
      </CardContent>
      <CardActions 
@@ -120,7 +108,7 @@ let id = Id
        </Button>
        
        <Button 
-       onClick={()=>handleDelete(id)}
+      
        color="error">
          <DeleteIcon  />
        </Button>

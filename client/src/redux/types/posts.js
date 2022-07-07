@@ -1,10 +1,7 @@
 
 
-export const types = {
-  
-  FETCH_DATA_REQUESTED : "FETCH_DATA_REQUESTED",
-  FETCH_DATA_SUCCEDED:"FETCH_DATA_SUCCEDED",
-  FETCH_DATA_FAILED:"FETCH_DATA_FAILED",
-  DATA_DELETED: "DATA_DELETED"
-  
-}
+export const CREATE = 'CREATE';
+export const UPDATE = 'UPDATE';
+export const DELETE = 'DELETE';
+export const FETCH_ALL = 'FETCH_ALL';
+export const LIKE = 'LIKE';

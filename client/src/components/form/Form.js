@@ -1,8 +1,7 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useSelector,useDispatch } from "react-redux"
+import { createPost } from "../../redux/actions/posts"
 
-import useFetch  from "../../hooks/useFetch"
-import axios from "axios"
 import {
       Card,
       Box,
@@ -17,12 +16,7 @@ import {
 } from "@mui/material"
 import { styles } from "../../styles"
 import FileBase64 from 'react-file-base64';
-import { 
-        createData, 
-        getData,
-        deleteData
-  
-} from "../../api/Api"
+
 
 const {
     section_padding,
@@ -36,39 +30,31 @@ const {
 
 
 const Form =()=>{
-  const { data,loading,error } = useFetch(getData)
-  const [title,setTitle] = useState("")
-  const [creator,setCreator] = useState("")
-  const [message,setMessage] = useState("")
-  const [tags,setTags] = useState([])
-  const [selectedFile,setSelectedFile] = useState("")
+ 
+  
+const [postData,setPostData] = useState({
+  
+  creator:"",
+  tittle:"",
+  message:"",
+  tags:"",
+  selectedFile:""
+  
+})
 
-const {Data} = useSelector((state)=>state.request)
-
-
-
-
+const dispatch = useDispatch()
 
 const handleSubmit =()=>{
-  axios.post(createData,{
-    title:title,
-    creator:creator,
-    message:message,
-    tags:tags,
-    selectedFile:selectedFile
-
-  })
+  dispatch(createPost(postData))
 }
-  
-if(error){
-  console.log(error)
-}
-if(loading){
-  return 
-  <h1>loading...</h1>
-  
-}
- 
+const clear =()=> 
+setPostData({
+  title:"",
+  creator:"",
+  message:"",
+  tags:"",
+  selectedFile:""
+})
 
   return (
     <Container 
@@ -81,51 +67,61 @@ if(loading){
     type="text"
     label="Creator"
     fullWidth
-    value={creator}
-    onChange={(e)=>
-    setCreator(e.target.value)}
     margin="dense"
-    
+    value={postData.creator}
+    onChange={(e)=>setPostData({
+      ...postData,
+      creator:e.target.value
+    })}
     />
     
     <TextField
     type="text"
     label="Title"
     fullWidth
-    value={title}
-    onChange={(e)=>
-    setTitle(e.target.value)}
     margin="dense"
-    
+    value={postData.title}
+    onChange={(e)=>setPostData({
+      ...postData,
+      title:e.target.value
+    })}
     />
     
     <TextField
     type="text"
     label="Message"
     fullWidth
-    value={message}
-    onChange={(e)=>
-    setMessage(e.target.value)}
     margin="dense"
     multiline
     rows={7}
+    value={postData.message}
+    onChange={(e)=>setPostData({
+      ...postData,
+      message:e.target.value
+    })}
     />
     
     <TextField
     type="text"
     label="Tags"
     fullWidth
-    value={tags}
-    onChange={(e)=>
-    setTags(e.target.value)}
     margin="dense"
     multiline
     rows={4}
+    value={postData.tags}
+    onChange={(e)=>setPostData({
+      ...postData,
+      tags:e.target.value
+    })}
     />
     
     <FileBase64
     multiple={ false }
-   onDone={({base64})=>setSelectedFile(base64)} />
+   onDone={({base64})=>setPostData({
+      ...postData,
+      selectedFile:base64
+    })}
+   />
     
     <Button
      onClick={handleSubmit}
@@ -142,8 +138,7 @@ if(loading){
     </Button>
     
     <Button
-  
-    
+     onClick={clear}
      color="error"
      variant="contained"
      fullWidth

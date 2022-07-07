@@ -4,11 +4,16 @@ import './index.css';
 import App from './App';
 import { ThemeProvider } from "@mui/material/styles"
 import { theme } from "./theme"
-
+import logger from "redux-logger"
 import { Provider } from "react-redux"
-import { store } from "./redux/store/posts"
+import  reducers  from "./redux/reducers"
+import { applyMiddleware,createStore,compose } from "redux"
+import thunk from "redux-thunk"
 
-
+const store = createStore(
+  reducers,
+  compose(applyMiddleware(thunk,logger))
+)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

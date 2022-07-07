@@ -4,7 +4,7 @@ import bodyParser from "body-parser"
 import mongoose from "mongoose"
 
 import { postModel } from "./models/posts.js"
-import { getRouter,postRouter,deleteRouter } from "./routes/posts.js"
+import  postsRoutes from "./routes/posts.js"
 
 const app = express()
 app.use(cors())
@@ -33,7 +33,6 @@ app.use(bodyParser.urlencoded({
 app.listen(PORT,()=>console.log(`running on port: ${PORT}`))
 
 
+app.use("/posts",postsRoutes)
 
-app.use("/get",getRouter)
-app.use("/post",postRouter)
-app.use("/delete/:id",deleteRouter)
+

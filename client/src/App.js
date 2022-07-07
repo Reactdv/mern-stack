@@ -1,4 +1,4 @@
-import { retriever } from "./helpers/retrieveData"
+
 import { Posts } from "./components/posts/Posts"
 import './App.css';
 import Form from "./components/form/Form"
@@ -12,8 +12,9 @@ import {
 } from "@mui/material"
 import memories from "./assets/images/memories.png"
 import { styles } from "./styles"
-import  useFetch  from "./hooks/useFetch"
-import { getData } from "./api/Api"
+import  { useDispatch }  from "react-redux"
+import { useEffect } from "react"
+import { getPosts } from "./redux/actions/posts"
 
 const {
     section_padding,
@@ -28,7 +29,11 @@ const {
 
 
 function App() {
-
+const dispatch = useDispatch()
+ 
+ useEffect(()=>{
+   dispatch (getPosts())
+ },[dispatch])
   
    return (
     <Container 
@@ -68,7 +73,9 @@ function App() {
       <Form />
      </Paper>
      
-     <Paper sx={section_padding}>
+     <Paper sx={[
+       section_margin,section_padding
+       ]}>
      
         <Posts />
     

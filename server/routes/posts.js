@@ -1,29 +1,23 @@
 import express from "express"
 import { 
-         postRoutes,
-         getRoutes,
-         deleteRoutes
+         getPosts,
+         getPost,
+         createPost,
+         likePost,
+         deletePost,
+         updatePost
          
 } from "../controllers/posts.js"
 
-const getRouter = new express.Router()
-const postRouter = new express.Router()
-const deleteRouter = new express.Router()
-const updateRouter = new express.Router()
-
-getRouter.get("/",getRoutes)
-
-postRouter.post("/",postRoutes)
-
-updateRouter.patch("/",(res,req)=>res.send("its working"))
-
-deleteRouter.delete("/",deleteRoutes)
+const router = express.Router()
 
 
-export { 
-        getRouter,
-        postRouter,
-        updateRouter,
-        deleteRouter
-  
-}
+router.get("/",getPosts)
+router.post("/",createPost)
+router.get("/:id",getPost)
+router.patch("/:id",updatePost)
+router.delete("/:id",deletePost)
+router.patch("/:id/likepost",likePost)
+
+
+export default router 
