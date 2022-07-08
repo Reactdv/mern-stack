@@ -1,21 +1,18 @@
-import axios from "axios"
-import { useState,useEffect } from "react"
+
+import { useState } from "react"
 import moment from "moment"
 import { useDispatch,useSelector } from "react-redux"
 import { updateId,deleteById,deletePost } from "../../../redux/actions/posts"
 
 import {
       Card,
-      CardHeader,
       CardContent,
       CardMedia,
       CardActions,
       Typography,
       Button,
-      Grid,
-      Box
+ 
 } from "@mui/material" 
-import chad from "../../../assets/images/chad.jpg"
 
 import { styles } from "./styles"
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';

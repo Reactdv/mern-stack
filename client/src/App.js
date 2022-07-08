@@ -6,14 +6,13 @@ import {
       Container,
       Paper,
       AppBar,
-      Typography,
-      Box
+      Typography
   
 } from "@mui/material"
 import memories from "./assets/images/memories.png"
 import { styles } from "./styles"
 import  { useDispatch }  from "react-redux"
-import { useEffect,useState } from "react"
+import { useEffect } from "react"
 import { getPosts } from "./redux/actions/posts"
 
 const {
@@ -33,7 +32,7 @@ const dispatch = useDispatch()
 
 useEffect(()=>{
   dispatch(getPosts())
-},[])
+},[dispatch])
 
    return (
     <Container 
@@ -67,7 +66,7 @@ useEffect(()=>{
        <img 
        height="50px"
        width="50px"
-       src={memories} 
+       src={memories} alt="icon"
        />
      </AppBar>
       <Form />

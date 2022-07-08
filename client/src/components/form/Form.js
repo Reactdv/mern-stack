@@ -1,30 +1,19 @@
 import { useState,useEffect } from "react"
 import { useSelector,useDispatch } from "react-redux"
-import { createPost,updateId,updatePost } from "../../redux/actions/posts"
+import { createPost,updatePost } from "../../redux/actions/posts"
 
 import {
-      Card,
-      Box,
       Button,
-      Input,
-      Paper,
       TextField,
-      Container,
-      Typography
+      Container
       
-       
 } from "@mui/material"
 import { styles } from "../../styles"
 import FileBase64 from 'react-file-base64';
 
 
 const {
-    section_padding,
-    section_margin,
-    row,
-    col,
-    flex_center,
-    between
+    section_padding
 
 } = styles
 

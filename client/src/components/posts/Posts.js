@@ -1,13 +1,6 @@
 import { Post } from "./post/Post"
 import { useSelector } from "react-redux"
-import { styles } from "./styles"
 import {
-      Card,
-      CardHeader,
-      CardMedia,
-      CardActions,
-      Typography,
-      Button,
       Grid,
       Box,
       CircularProgress
