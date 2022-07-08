@@ -6,7 +6,8 @@ import {
      UPDATE,
      DELETE,
      LIKE,
-
+     UPDATEID,
+     DELETEBYID
 } from "../types/posts"
 
 
@@ -50,7 +51,7 @@ async(dispatch)=>{
   try{
     const { data } = 
     await api.updatePost(id,post)
-    
+   
     dispatch({
       
       type:UPDATE,
@@ -99,3 +100,19 @@ async(dispatch)=>{
     console.log(err)
   }
 }
+
+export const updateId =(id)=>(
+ { 
+  type:UPDATEID,
+  payload:id
+ }
+  )
+
+export const deleteById =(id)=>(
+  
+  {
+    type:DELETEBYID,
+    payload:id
+  }
+  
+  ) 

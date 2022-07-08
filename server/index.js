@@ -1,3 +1,4 @@
+import dotenv from "dotenv"
 import express from "express"
 import cors from "cors"
 import bodyParser from "body-parser"
@@ -7,9 +8,14 @@ import { postModel } from "./models/posts.js"
 import  postsRoutes from "./routes/posts.js"
 
 const app = express()
-app.use(cors())
-const PORT = process.env | 5000
-const CONNECTION_URL = 'mongodb+srv://jerlly:123@cluster0.wbujg6r.mongodb.net/?retryWrites=true&w=majority'
+dotenv.config()
+app.use(cors({
+  origin:"*"
+}))
+const PORT = 5000
+const CONNECTION_URL = "mongodb+srv://jerlly:123@cluster0.wbujg6r.mongodb.net/?retryWrites=true&w=majority"
+
+
 
 mongoose.connect(CONNECTION_URL,{
   useNewUrlParser:true,

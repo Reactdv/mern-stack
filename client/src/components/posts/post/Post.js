@@ -1,6 +1,9 @@
 import axios from "axios"
 import { useState,useEffect } from "react"
 import moment from "moment"
+import { useDispatch,useSelector } from "react-redux"
+import { updateId,deleteById,deletePost } from "../../../redux/actions/posts"
+
 import {
       Card,
       CardHeader,
@@ -23,12 +26,27 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 
 export const Post =( {post} )=>{
-  const [isLiked,setIsLiked] = useState(false)
+
+const currentId = 
+useSelector(state=>state.currentId)
+ const [isLiked,setIsLiked] = useState(false)
   
 const handleLike =()=> 
 setIsLiked(like=>!like)  
-  
+const dispatch = useDispatch()
  
+const handleUpdate =()=>{
+  dispatch(updateId(post._id))
+  
+}
+
+const handleDelete =()=>{
+  dispatch(deleteById(post._id))
+  dispatch(deletePost(currentId))
+}
+
+console.log(deletePost())
+
   return (
     
    <Card sx={{
@@ -49,9 +67,11 @@ setIsLiked(like=>!like)
      }}
      color="common.white"
      variant="h4">
-      {post.Creator}
+      {post.creator}
      </Typography>
-     <Box sx={{
+     <Button 
+      onClick={handleUpdate}
+     sx={{
        position:"absolute",
        top:"10px",
        right:"10px",
@@ -59,7 +79,7 @@ setIsLiked(like=>!like)
      }}>
      <MoreHorizIcon 
      />
-     </Box>
+     </Button>
      
      <Typography 
      sx={{
@@ -108,7 +128,7 @@ setIsLiked(like=>!like)
        </Button>
        
        <Button 
-      
+        onClick={handleDelete}
        color="error">
          <DeleteIcon  />
        </Button>

@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { useSelector,useDispatch } from "react-redux"
-import { createPost } from "../../redux/actions/posts"
+import { createPost,updateId,updatePost } from "../../redux/actions/posts"
 
 import {
       Card,
@@ -30,8 +30,10 @@ const {
 
 
 const Form =()=>{
- 
-  
+const currentId = useSelector(state=> state.currentId)
+
+ const post = useSelector(state=> currentId ? state.posts.find((item)=>item._id === currentId) : null
+) 
 const [postData,setPostData] = useState({
   
   creator:"",
@@ -41,13 +43,29 @@ const [postData,setPostData] = useState({
   selectedFile:""
   
 })
-
 const dispatch = useDispatch()
+useEffect(()=>{
+  if(post) setPostData(post) 
+ },[post])
+  
 
-const handleSubmit =()=>{
-  dispatch(createPost(postData))
+console.log(postData)
+
+const handleSubmit =(e)=>{
+  e.preventDefault()
+  if(currentId){
+   dispatch(updatePost(currentId,postData))
+    clear()
+  }else{
+    dispatch(createPost(postData))
+    clear()
+  }
 }
-const clear =()=> 
+
+
+console.log(currentId)
+const clear =()=>{
+  
 setPostData({
   title:"",
   creator:"",
@@ -55,13 +73,17 @@ setPostData({
   tags:"",
   selectedFile:""
 })
+}
 
   return (
     <Container 
     sx={section_padding}
     maxWidth="laptop">
  
-  <form>
+  <form 
+  onSubmit={handleSubmit}
+  autoComplete={false}
+  noValidate>
   
     <TextField
     type="text"
@@ -124,7 +146,7 @@ setPostData({
    />
     
     <Button
-     onClick={handleSubmit}
+     type="submit"
      variant="contained"
      fullWidth
      sx={[

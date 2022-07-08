@@ -1,10 +1,13 @@
+import { createSlice } from "@reduxjs/toolkit"
 
 import { 
      FETCH_ALL, 
      CREATE, 
      UPDATE, 
      DELETE, 
-     LIKE 
+     LIKE,
+     UPDATEID,
+     DELETEBYID
   
 } from '../types/posts';
 
@@ -41,3 +44,16 @@ const reducer =(posts=[],action)=>{
 }
 
 export default reducer
+
+
+export const currentId =
+(state = null ,action )=>{
+  switch(action.type){
+    case UPDATEID :
+    return state = action.payload
+    case DELETEBYID :
+      return state =  action.payload
+    default :
+    return state
+  }
+}

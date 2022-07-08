@@ -13,7 +13,7 @@ import {
 import memories from "./assets/images/memories.png"
 import { styles } from "./styles"
 import  { useDispatch }  from "react-redux"
-import { useEffect } from "react"
+import { useEffect,useState } from "react"
 import { getPosts } from "./redux/actions/posts"
 
 const {
@@ -30,11 +30,11 @@ const {
 
 function App() {
 const dispatch = useDispatch()
- 
- useEffect(()=>{
-   dispatch (getPosts())
- },[dispatch])
-  
+
+useEffect(()=>{
+  dispatch(getPosts())
+},[])
+
    return (
     <Container 
      sx={[
