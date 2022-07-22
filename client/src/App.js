@@ -1,24 +1,85 @@
-import logo from './logo.svg';
+
+import { Posts } from "./components/posts/Posts"
 import './App.css';
+import Form from "./components/form/Form"
+import { 
+      Container,
+      Paper,
+      AppBar,
+      Typography
+  
+} from "@mui/material"
+import memories from "./assets/images/memories.png"
+import { styles } from "./styles"
+import  { useDispatch }  from "react-redux"
+import { useEffect } from "react"
+import { getPosts } from "./redux/actions/posts"
+
+const {
+    section_padding,
+    section_margin,
+    row,
+    col,
+    flex_center,
+    between
+
+} = styles
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const dispatch = useDispatch()
+
+useEffect(()=>{
+  dispatch(getPosts())
+},[dispatch])
+
+   return (
+    <Container 
+     sx={[
+       flex_center,
+       section_padding,
+       col
+      
+       ]}
+     >
+     <Paper
+     maxWidth="md"
+     >
+      <AppBar 
+      sx={[
+        
+        flex_center,
+        row,
+        between,
+        section_padding,
+        {bgcolor:"clr_pink.main"}
+        ]}
+       position="static"
+      color="inherit"
+       >
+       <Typography 
+       color="common.white"
+       variant="h4">
+        Memories
+       </Typography>
+       <img 
+       height="50px"
+       width="50px"
+       src={memories} alt="icon"
+       />
+     </AppBar>
+      <Form />
+     </Paper>
+     
+     <Paper sx={[
+       section_margin,section_padding
+       ]}>
+     
+        <Posts />
+    
+     </Paper>
+    </Container>
   );
 }
 
